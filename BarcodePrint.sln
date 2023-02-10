@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBarcode", "TestBarcode\TestBarcode.csproj", "{E2355818-3616-40B9-96BB-4EE0E4DBE5D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRS", "BRS\BRS.csproj", "{0EE5EB24-08B9-463F-9E19-A5D12A92B5E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2355818-3616-40B9-96BB-4EE0E4DBE5D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2355818-3616-40B9-96BB-4EE0E4DBE5D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2355818-3616-40B9-96BB-4EE0E4DBE5D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2355818-3616-40B9-96BB-4EE0E4DBE5D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE5EB24-08B9-463F-9E19-A5D12A92B5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE5EB24-08B9-463F-9E19-A5D12A92B5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE5EB24-08B9-463F-9E19-A5D12A92B5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE5EB24-08B9-463F-9E19-A5D12A92B5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5B10F52-67C2-45D5-845C-229873E10ABB}
+	EndGlobalSection
+EndGlobal
