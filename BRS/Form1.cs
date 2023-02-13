@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
@@ -9,18 +11,22 @@ namespace BRS
 {
     public partial class Form1 : Form
     {
-        public string Barcode { get; set; }
-        public string Signature { get; set; }
-        public string BuchName { get; set; }
+        public string? Barcode { get; set; }
+        public string? Signature { get; set; }
+        public string? BuchName { get; set; }
 
         public List<string> Brs_Print = new List<string>();
+
+        PrintDialog PRD = new PrintDialog();
+
+        public string PrintText { get; set; }
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void buttoncheck_Click(object sender, EventArgs e)
+        public void buttoncheck_Click(object sender, EventArgs e)
     {     
            
         if (textBox1.Text=="" ) 
@@ -31,21 +37,22 @@ namespace BRS
         {
         Brs_Print.Clear();
         richTextBox1.Clear();
-        Signature = GetSignature(Barcode).ElementAt(0);
-        BuchName = GetSignature(Barcode).ElementAt(1);
+        Get_Signature_and_Name(Barcode);
             if (Signature == null)
             {MessageBox.Show("Der Barcode wurde nicht gefunden", "Nachricht");}
             else 
             { 
             SplitSignature(Signature);
         string result=""; 
-        result+=BuchName+ "\n";
+      //  result+=BuchName+ "\n";
+        
         foreach (string s in Brs_Print)
         {
             result += s+"\n" ;
         }
         richTextBox1.Text = result;
-            }
+        
+             }
         }
 
     }
@@ -56,23 +63,52 @@ namespace BRS
 
         private void buttonprint_Click(object sender, EventArgs e)
         {
-            CreateWordDocument(@"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\Temp1.docx", @"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\test4.docx");
-        }       
-        public string[] GetSignature(string barcode)
+            if (string.IsNullOrEmpty(Signature)) 
+            {
+                MessageBox.Show("Bitte Barcode eingeben", "Nachricht");
+            }
+            else 
+            { 
+           CreateWordDocument(@"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\Temp1.docx", @"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\test4.docx");
+            }
+            //PrintDocument a =new PrintDocument();
+            //DialogResult print;
+            //print = PRD.ShowDialog();
+            //a.PrintPage += A_PrintPage;
+            //if(print==DialogResult.OK)
+            //{
+            //    a.Print();
+            //}
+
+        }
+
+        private void A_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            
+            Font schrift = new Font("Arial", 12);
+            SolidBrush pen=new SolidBrush(Color.Black);
+            PointF punkt = new PointF(70, 60);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+          //  stringFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+            e.Graphics.DrawString(PrintText,schrift,pen,punkt,stringFormat);
+            
+        }
+
+        public void Get_Signature_and_Name(string barcode)
         {
             try { 
             string url = "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=" + barcode + "&apikey=l8xx60f2549444854849b9706a876352a5a9";
             XDocument document = XDocument.Load(url);
-            string[] result = new string[2]; 
-            var signature = document.Descendants("alternative_call_number").ElementAt(0).Value;
-            var buchname  = document.Descendants("title").ElementAt(0).Value;
-                result[0] = signature;
-                result[1] = buchname;
-            return result;
+            
+            Signature = document.Descendants("alternative_call_number").ElementAt(0).Value;
+            BuchName  = document.Descendants("title").ElementAt(0).Value;
+                     
             }
             catch
             {
-                return null;
+                Signature= null;
+                BuchName= null;
             }
          }  
         public void SplitSignature(string signature)
@@ -142,6 +178,7 @@ namespace BRS
                                   ref missing, ref missing, ref missing,
                                   ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
                                   ref missing, ref missing, ref missing);
+                myWordDoc.PrintOut();
                 myWordDoc.Close();
                 wordApp.Quit();
             }

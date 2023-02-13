@@ -13,6 +13,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 internal class Program
 {
+    PrintDialog PRD = new PrintDialog();
     private static void Main(string[] args)
     {
         Program a = new Program();
@@ -70,6 +71,27 @@ internal class Program
             wordApp.Quit();
         }
     }
+}
+
+PrintDocument a = new PrintDocument();
+DialogResult print;
+print = PRD.ShowDialog();
+a.PrintPage += A_PrintPage;
+if (print == DialogResult.OK)
+{
+    a.Print();
+}
+private void A_PrintPage(object sender, PrintPageEventArgs e)
+{
+
+    Font schrift = new Font("Arial", 12);
+    SolidBrush pen = new SolidBrush(Color.Black);
+    PointF punkt = new PointF(70, 60);
+    StringFormat stringFormat = new StringFormat();
+    stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+    //  stringFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+    e.Graphics.DrawString(PrintText, schrift, pen, punkt, stringFormat);
+
 }
 
 
