@@ -13,12 +13,12 @@ using static System.Net.Mime.MediaTypeNames;
 
 internal class Program
 {
-    PrintDialog PRD = new PrintDialog();
     private static void Main(string[] args)
     {
         Program a = new Program();
-        a.CreateWordDocument(@"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\Temp1.docx", @"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\test4.docx");
-       
+        string pfad = System.IO.Directory.GetCurrentDirectory();
+        a.CreateWordDocument(Path.Combine(pfad,"Temp1.docx") , Path.Combine(pfad, "test4.docx"));
+        
 
     }
     public void FindAndReplace(Word.Application wordApp, object toFindText, object replaceWithText)
@@ -61,7 +61,7 @@ internal class Program
                                                 ref missing, ref missing, ref missing,
                                                 ref missing, ref missing, ref missing, ref missing);
             myWordDoc.Activate();
-            this.FindAndReplace(wordApp, "BRS0", "some");
+            this.FindAndReplace(wordApp, "BRS0", "someone");
             myWordDoc.SaveAs2(ref SaveAs, ref missing, ref missing, ref missing,
                               ref missing, ref missing, ref missing,
                               ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
@@ -73,26 +73,6 @@ internal class Program
     }
 }
 
-PrintDocument a = new PrintDocument();
-DialogResult print;
-print = PRD.ShowDialog();
-a.PrintPage += A_PrintPage;
-if (print == DialogResult.OK)
-{
-    a.Print();
-}
-private void A_PrintPage(object sender, PrintPageEventArgs e)
-{
-
-    Font schrift = new Font("Arial", 12);
-    SolidBrush pen = new SolidBrush(Color.Black);
-    PointF punkt = new PointF(70, 60);
-    StringFormat stringFormat = new StringFormat();
-    stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-    //  stringFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-    e.Graphics.DrawString(PrintText, schrift, pen, punkt, stringFormat);
-
-}
 
 
 
@@ -121,8 +101,32 @@ private void A_PrintPage(object sender, PrintPageEventArgs e)
 
 
 
+//PrintDialog PRD = new PrintDialog();
 
 
+
+//private void A_PrintPage(object sender, PrintPageEventArgs e)
+//{
+
+//    Font schrift = new Font("Arial", 12);
+//    SolidBrush pen = new SolidBrush(Color.Black);
+//    PointF punkt = new PointF(70, 60);
+//    StringFormat stringFormat = new StringFormat();
+//    stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+//    //  stringFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+//    e.Graphics.DrawString(PrintText, schrift, pen, punkt, stringFormat);
+
+//}
+
+
+//PrintDocument a =new PrintDocument();
+//DialogResult print;
+//print = PRD.ShowDialog();
+//a.PrintPage += A_PrintPage;
+//if(print==DialogResult.OK)
+//{
+//    a.Print();
+//}
 
 
 

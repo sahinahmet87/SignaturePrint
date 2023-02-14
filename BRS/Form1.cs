@@ -14,18 +14,13 @@ namespace BRS
         public string? Barcode { get; set; }
         public string? Signature { get; set; }
         public string? BuchName { get; set; }
-
-        public List<string> Brs_Print = new List<string>();
-
-        PrintDialog PRD = new PrintDialog();
-
+        public List<string> Brs_Print = new List<string>();            
         public string PrintText { get; set; }
 
         public Form1()
         {
             InitializeComponent();
         }
-
         public void buttoncheck_Click(object sender, EventArgs e)
     {     
            
@@ -37,24 +32,26 @@ namespace BRS
         {
         Brs_Print.Clear();
         richTextBox1.Clear();
-        Get_Signature_and_Name(Barcode);
-            if (Signature == null)
-            {MessageBox.Show("Der Barcode wurde nicht gefunden", "Nachricht");}
-            else 
-            { 
-            SplitSignature(Signature);
-        string result=""; 
-      //  result+=BuchName+ "\n";
-        
+        Get_Signature_and_Name(Barcode); 
+        if (Signature == null)
+        {MessageBox.Show("Der Barcode wurde nicht gefunden", "Nachricht");}
+        else 
+        { 
+        SplitSignature(Signature);
+        string result="";     
         foreach (string s in Brs_Print)
         {
             result += s+"\n" ;
         }
         richTextBox1.Text = result;
-        
-             }
+        if (autodruck.Checked)
+        {
+            string pfad = System.IO.Directory.GetCurrentDirectory();
+            CreateWordDocument(Path.Combine(pfad, "Temp1.docx"), Path.Combine(pfad, "test4.docx"));
         }
-
+                }
+               
+         }
     }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -68,39 +65,20 @@ namespace BRS
                 MessageBox.Show("Bitte Barcode eingeben", "Nachricht");
             }
             else 
-            { 
-           CreateWordDocument(@"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\Temp1.docx", @"C:\Users\sahin_a\source\repos\BarcodePrint\TestBarcode\test4.docx");
-            }
-            //PrintDocument a =new PrintDocument();
-            //DialogResult print;
-            //print = PRD.ShowDialog();
-            //a.PrintPage += A_PrintPage;
-            //if(print==DialogResult.OK)
-            //{
-            //    a.Print();
-            //}
+            {
+                string pfad = System.IO.Directory.GetCurrentDirectory();
+                CreateWordDocument(Path.Combine(pfad, "Temp1.docx"), Path.Combine(pfad, "test4.docx"));              
+            }     
 
-        }
 
-        private void A_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            
-            Font schrift = new Font("Arial", 12);
-            SolidBrush pen=new SolidBrush(Color.Black);
-            PointF punkt = new PointF(70, 60);
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-          //  stringFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
-            e.Graphics.DrawString(PrintText,schrift,pen,punkt,stringFormat);
-            
-        }
 
-        public void Get_Signature_and_Name(string barcode)
+
+                }
+        public void Get_Signature_and_Name(string barcode) // Sendet Barcode-Nummer mit API und gibt Signature und Buchname aus
         {
             try { 
             string url = "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=" + barcode + "&apikey=l8xx60f2549444854849b9706a876352a5a9";
-            XDocument document = XDocument.Load(url);
-            
+            XDocument document = XDocument.Load(url);            
             Signature = document.Descendants("alternative_call_number").ElementAt(0).Value;
             BuchName  = document.Descendants("title").ElementAt(0).Value;
                      
@@ -110,8 +88,8 @@ namespace BRS
                 Signature= null;
                 BuchName= null;
             }
-         }  
-        public void SplitSignature(string signature)
+         }   
+        public void SplitSignature(string signature)// Die Signatur wird aufgeteilt und jeder Teil der Signatur wird einer String-Liste (BRS_Print) hinzugefügt
         {
             string[] BrsArray= signature.Split(new char[] { ' ' });
 
@@ -119,9 +97,9 @@ namespace BRS
             {
                 Brs_Print.Add(b);  
             }
-            
-        }
-        private void FindAndReplace(Word.Application wordApp, object toFindText, object replaceWithText)
+
+        }  
+        private void FindAndReplace(Word.Application wordApp, object toFindText, object replaceWithText)  //Word-Vorlage durch Elemente von BRC Print ersetzt
         {
             object matchCase = true;
             object matchwholeWord = true;
@@ -143,8 +121,8 @@ namespace BRS
                                            ref nmatchAllforms, ref forward, ref wrap, ref format, ref replaceWithText,
                                            ref replace, ref matchKashida, ref matchDiactitics, ref matchAlefHamza,
                                            ref matchControl);
-        }
-        private void CreateWordDocument(object filename, object SaveAs)
+        }  
+        private void CreateWordDocument(object filename, object SaveAs)// Ein neues Word-Dokument wird erstellt
         {
             Word.Application wordApp = new Word.Application();
             object missing = Missing.Value;
@@ -166,11 +144,11 @@ namespace BRS
 
                 for(int i=0; i<Brs_Print.Count;i++)
                 { 
-                this.FindAndReplace(wordApp, "BRS"+i, Brs_Print[i] );
+                FindAndReplace(wordApp, "BRS"+i, Brs_Print[i] );
                 }
                 for (int i = Brs_Print.Count; i < 6; i++)
                 {
-                 this.FindAndReplace(wordApp, "BRS"+i,"");
+                FindAndReplace(wordApp, "BRS"+i,"");
                 }
 
 
@@ -182,6 +160,14 @@ namespace BRS
                 myWordDoc.Close();
                 wordApp.Quit();
             }
+        }
+
+        private void autodruck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autodruck.Checked)
+            buttonprint.Enabled = false;
+            else
+            buttonprint.Enabled = true;
         }
     }
 }

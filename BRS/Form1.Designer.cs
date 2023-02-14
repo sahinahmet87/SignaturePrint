@@ -34,6 +34,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttoncheck = new System.Windows.Forms.Button();
             this.buttonprint = new System.Windows.Forms.Button();
+            this.autodruck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -52,8 +53,10 @@
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(73, 22);
             this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "Barcodenummer eingeben";
             this.textBox1.Size = new System.Drawing.Size(147, 29);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Tag = "";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // richTextBox1
@@ -71,7 +74,7 @@
             this.buttoncheck.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttoncheck.Image = ((System.Drawing.Image)(resources.GetObject("buttoncheck.Image")));
             this.buttoncheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttoncheck.Location = new System.Drawing.Point(56, 96);
+            this.buttoncheck.Location = new System.Drawing.Point(56, 75);
             this.buttoncheck.Name = "buttoncheck";
             this.buttoncheck.Size = new System.Drawing.Size(145, 38);
             this.buttoncheck.TabIndex = 3;
@@ -92,11 +95,23 @@
             this.buttonprint.UseVisualStyleBackColor = true;
             this.buttonprint.Click += new System.EventHandler(this.buttonprint_Click);
             // 
+            // autodruck
+            // 
+            this.autodruck.AutoSize = true;
+            this.autodruck.Location = new System.Drawing.Point(56, 126);
+            this.autodruck.Name = "autodruck";
+            this.autodruck.Size = new System.Drawing.Size(141, 19);
+            this.autodruck.TabIndex = 5;
+            this.autodruck.Text = "Automatisch Drucken";
+            this.autodruck.UseVisualStyleBackColor = true;
+            this.autodruck.CheckedChanged += new System.EventHandler(this.autodruck_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 452);
+            this.Controls.Add(this.autodruck);
             this.Controls.Add(this.buttonprint);
             this.Controls.Add(this.buttoncheck);
             this.Controls.Add(this.richTextBox1);
@@ -117,5 +132,6 @@
         private RichTextBox richTextBox1;
         private Button buttoncheck;
         private Button buttonprint;
+        private CheckBox autodruck;
     }
 }
