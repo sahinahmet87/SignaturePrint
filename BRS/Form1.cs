@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Reflection;
@@ -41,17 +42,18 @@ namespace BRS
         string result="";     
         foreach (string s in Brs_Print)
         {
-            result += s+"\n" ;
+        result += s+"\n" ;
         }
+        result=result.Remove(result.Length - 1, 1);
         richTextBox1.Text = result;
+        richTextBox_BuchName.Text = BuchName;
         if (autodruck.Checked)
         {
-            string pfad = System.IO.Directory.GetCurrentDirectory();
-            CreateWordDocument(Path.Combine(pfad, "Temp1.docx"), Path.Combine(pfad, "test4.docx"));
+        string pfad = System.IO.Directory.GetCurrentDirectory();
+        CreateWordDocument(Path.Combine(pfad, "Temp1.docx"));
         }
-                }
-               
-         }
+        }            
+        }
     }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -67,11 +69,8 @@ namespace BRS
             else 
             {
                 string pfad = System.IO.Directory.GetCurrentDirectory();
-                CreateWordDocument(Path.Combine(pfad, "Temp1.docx"), Path.Combine(pfad, "test4.docx"));              
-            }     
-
-
-
+                CreateWordDocument(Path.Combine(pfad, "Temp1.docx"));              
+            }   
 
                 }
         public void Get_Signature_and_Name(string barcode) // Sendet Barcode-Nummer mit API und gibt Signature und Buchname aus
@@ -99,7 +98,7 @@ namespace BRS
             }
 
         }  
-        private void FindAndReplace(Word.Application wordApp, object toFindText, object replaceWithText)  //Word-Vorlage durch Elemente von BRC Print ersetzt
+        private void FindAndReplace(Word.Application wordApp, object toFindText, object replaceWithText)  //Word-Vorlage wird durch Elemente von BRC_Print ersetzt
         {
             object matchCase = true;
             object matchwholeWord = true;
@@ -122,7 +121,7 @@ namespace BRS
                                            ref replace, ref matchKashida, ref matchDiactitics, ref matchAlefHamza,
                                            ref matchControl);
         }  
-        private void CreateWordDocument(object filename, object SaveAs)// Ein neues Word-Dokument wird erstellt
+        private void CreateWordDocument(object filename)// Ein neues Word-Dokument wird erstellt
         {
             Word.Application wordApp = new Word.Application();
             object missing = Missing.Value;
@@ -139,9 +138,6 @@ namespace BRS
                                                     ref missing, ref missing, ref missing,
                                                     ref missing, ref missing, ref missing, ref missing);
                 myWordDoc.Activate();
-
-
-
                 for(int i=0; i<Brs_Print.Count;i++)
                 { 
                 FindAndReplace(wordApp, "BRS"+i, Brs_Print[i] );
@@ -150,24 +146,22 @@ namespace BRS
                 {
                 FindAndReplace(wordApp, "BRS"+i,"");
                 }
-
-
-                myWordDoc.SaveAs2(ref SaveAs, ref missing, ref missing, ref missing,
-                                  ref missing, ref missing, ref missing,
-                                  ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
-                                  ref missing, ref missing, ref missing);
                 myWordDoc.PrintOut();
-                myWordDoc.Close();
+                myWordDoc.Close(0);
                 wordApp.Quit();
             }
         }
-
         private void autodruck_CheckedChanged(object sender, EventArgs e)
         {
             if (autodruck.Checked)
             buttonprint.Enabled = false;
             else
             buttonprint.Enabled = true;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PrintDialog PrintDialog1 = new PrintDialog();
+            PrintDialog1.ShowDialog();
         }
     }
 }

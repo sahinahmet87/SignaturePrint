@@ -61,7 +61,7 @@
   <data name="label1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAKJJREFUWEftyjEKAwEMxMD7/6eTJtpCoPpSeGALGT/nnH/y+Q20h+q6wz316KG6
+        DAAACwwBP0AiyAAAAKJJREFUWEftyjEKAwEMxMD7/6eTJtpCoPpSeGALGT/nnH/y+Q20h+q6wz316KG6
         7nBPPXqorjvcU48equsO99Sjh+q6wz316KG67nBPPXqorjvcU48equsO99Sjh+q6wz316KG67nBPPXqo
         rjvcU48equsO99Sjh+q6wz316KG67nBPPXqorjvcU48equsO99Sjh+q6wz316KG67nCfc970PF+de0LM
         qoIvuQAAAABJRU5ErkJggg==
@@ -70,7 +70,7 @@
   <data name="buttoncheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAA05JREFUSEvt1slPU1EUB+AmQiKWqQMFSoHiAiUMxhVKTAhDAUFoGcpQhg4YY0zU
+        DAAACwwBP0AiyAAAA05JREFUSEvt1slPU1EUB+AmQiKWqQMFSoHiAiUMxhVKTAhDAUFoGcpQhg4YY0zU
         AK6tAalUA1ILCJROKEVa0GiissDwHzjEmGhESHQHNUJcuAGO9z5ubbB95bWw5Nd01dfz5fadd05ZhwmU
         /EVtWIpLlZfyRNmc7FB3JDvaOkRTymbhVOtZ1mJ+GLns4CKeU59KdWnsqU7Vz5QZFaRMqyDZoQTRVBuI
         HrdC0mQLJNoU7kSrwp5ka8whXws96S8u8dNc7ZNil3or1akGOlRob8YwJFqbIMHSsCWYaLAJ7TIeKRNc
@@ -90,7 +90,7 @@
   <data name="buttonprint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAQ9JREFUSEvtlzFuwjAYRsPCxshFYKtgZYKBQ8AtWgaOwsLGxEQPgASHgJETsNF+
+        DAAACwwBP0AiyAAAAQ9JREFUSEvtlzFuwjAYRsPCxshFYKtgZYKBQ8AtWgaOwsLGxEQPgASHgJETsNF+
         T6ojgwy2kzphyJOeUMz3+0MBlCR7R6byWFL2iGYuz3+vRTSz0TDEpy4Ks01xEE1xLEHFA8nP/yexJ/kh
         c76lK5jCnczhtLhCKbz7+lIVb2RHLq21Soq/JIylWauk+CrX8mKtVVLssin2hyIJ2tMXasue7HskQxb+
         pXgib9KVsSXDXweCivfSG4rkWTFdOQvpCpnioTxIjl1u5SOsu/b8lDktOZJcxowryTB05Uza79u67iaZ
