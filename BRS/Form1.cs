@@ -1,9 +1,4 @@
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using File = System.IO.File;
 using Word = Microsoft.Office.Interop.Word;
@@ -18,13 +13,16 @@ namespace BRS
         public List<string> Brs_Print = new List<string>();            
         public string PrintText { get; set; }
 
+        
         public Form1()
         {
             InitializeComponent();
+
         }
         public void buttoncheck_Click(object sender, EventArgs e)
-    {     
-           
+    {
+            
+                     
         if (textBox1.Text=="" ) 
         {
          MessageBox.Show("Bitte Barcode eingeben", "Nachricht");
@@ -35,9 +33,13 @@ namespace BRS
         richTextBox1.Clear();
         Get_Signature_and_Name(Barcode); 
         if (Signature == null)
-        {MessageBox.Show("Der Barcode wurde nicht gefunden", "Nachricht");}
+        {
+            MessageBox.Show("Der Barcode wurde nicht gefunden", "Nachricht");
+            textBox1.Clear();
+        }
         else 
-        { 
+        {
+        textBox1.Clear();
         SplitSignature(Signature);
         string result="";     
         foreach (string s in Brs_Print)
@@ -50,7 +52,7 @@ namespace BRS
         if (autodruck.Checked)
         {
         string pfad = System.IO.Directory.GetCurrentDirectory();
-        CreateWordDocument(Path.Combine(pfad, "Temp1.docx"));
+        PrintWordDocument(Path.Combine(pfad, "Temp1.docx"));        
         }
         }            
         }
@@ -59,7 +61,6 @@ namespace BRS
         {
             Barcode = textBox1.Text;
         }
-
         private void buttonprint_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Signature)) 
@@ -69,7 +70,7 @@ namespace BRS
             else 
             {
                 string pfad = System.IO.Directory.GetCurrentDirectory();
-                CreateWordDocument(Path.Combine(pfad, "Temp1.docx"));              
+                PrintWordDocument(Path.Combine(pfad, "Temp1.docx"));              
             }   
 
                 }
@@ -115,13 +116,12 @@ namespace BRS
             object visible = true;
             object replace = -2;
             object wrap = 1;
-
             wordApp.Selection.Find.Execute(ref toFindText, ref matchCase, ref matchwholeWord, ref matchwildCards, ref matchSoundLike,
                                            ref nmatchAllforms, ref forward, ref wrap, ref format, ref replaceWithText,
                                            ref replace, ref matchKashida, ref matchDiactitics, ref matchAlefHamza,
                                            ref matchControl);
         }  
-        private void CreateWordDocument(object filename)// Ein neues Word-Dokument wird erstellt
+        private void PrintWordDocument(object filename)// Das Worddokument wird ausgedruckt
         {
             Word.Application wordApp = new Word.Application();
             object missing = Missing.Value;
@@ -154,14 +154,26 @@ namespace BRS
         private void autodruck_CheckedChanged(object sender, EventArgs e)
         {
             if (autodruck.Checked)
+            { 
             buttonprint.Enabled = false;
-            else
+                buttoncheck.Text = "Check&&Print";    
+            }
+            else 
+            { 
             buttonprint.Enabled = true;
-        }
+            buttoncheck.Text = "Check";
+            }
+            }
         private void button1_Click(object sender, EventArgs e)
         {
             PrintDialog PrintDialog1 = new PrintDialog();
             PrintDialog1.ShowDialog();
+        }
+
+        private void Eingabe_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.ShowDialog();
         }
     }
 }

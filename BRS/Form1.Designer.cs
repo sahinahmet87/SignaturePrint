@@ -35,8 +35,8 @@
             this.buttoncheck = new System.Windows.Forms.Button();
             this.buttonprint = new System.Windows.Forms.Button();
             this.autodruck = new System.Windows.Forms.CheckBox();
-            this.button_einstellung = new System.Windows.Forms.Button();
             this.richTextBox_BuchName = new System.Windows.Forms.RichTextBox();
+            this.Eingabe = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -64,7 +64,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox1.Location = new System.Drawing.Point(9, 210);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 257);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(249, 176);
@@ -73,12 +73,12 @@
             // 
             // buttoncheck
             // 
-            this.buttoncheck.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttoncheck.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttoncheck.Image = ((System.Drawing.Image)(resources.GetObject("buttoncheck.Image")));
             this.buttoncheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttoncheck.Location = new System.Drawing.Point(73, 72);
+            this.buttoncheck.Location = new System.Drawing.Point(63, 73);
             this.buttoncheck.Name = "buttoncheck";
-            this.buttoncheck.Size = new System.Drawing.Size(145, 38);
+            this.buttoncheck.Size = new System.Drawing.Size(155, 38);
             this.buttoncheck.TabIndex = 3;
             this.buttoncheck.Text = "Check";
             this.buttoncheck.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             this.buttonprint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonprint.Image = ((System.Drawing.Image)(resources.GetObject("buttonprint.Image")));
             this.buttonprint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonprint.Location = new System.Drawing.Point(9, 411);
+            this.buttonprint.Location = new System.Drawing.Point(73, 457);
             this.buttonprint.Name = "buttonprint";
             this.buttonprint.Size = new System.Drawing.Size(117, 39);
             this.buttonprint.TabIndex = 4;
@@ -108,41 +108,46 @@
             this.autodruck.UseVisualStyleBackColor = true;
             this.autodruck.CheckedChanged += new System.EventHandler(this.autodruck_CheckedChanged);
             // 
-            // button_einstellung
-            // 
-            this.button_einstellung.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_einstellung.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_einstellung.Location = new System.Drawing.Point(141, 411);
-            this.button_einstellung.Name = "button_einstellung";
-            this.button_einstellung.Size = new System.Drawing.Size(117, 39);
-            this.button_einstellung.TabIndex = 6;
-            this.button_einstellung.Text = "Druckeinstellungen";
-            this.button_einstellung.UseVisualStyleBackColor = true;
-            this.button_einstellung.Click += new System.EventHandler(this.button1_Click);
-            // 
             // richTextBox_BuchName
             // 
-            this.richTextBox_BuchName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox_BuchName.Location = new System.Drawing.Point(9, 155);
+            this.richTextBox_BuchName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBox_BuchName.Location = new System.Drawing.Point(12, 155);
             this.richTextBox_BuchName.Name = "richTextBox_BuchName";
             this.richTextBox_BuchName.ReadOnly = true;
-            this.richTextBox_BuchName.Size = new System.Drawing.Size(249, 53);
+            this.richTextBox_BuchName.Size = new System.Drawing.Size(249, 96);
             this.richTextBox_BuchName.TabIndex = 7;
             this.richTextBox_BuchName.Text = "";
             // 
+            // Eingabe
+            // 
+            this.Eingabe.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Eingabe.Image = ((System.Drawing.Image)(resources.GetObject("Eingabe.Image")));
+            this.Eingabe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Eingabe.Location = new System.Drawing.Point(78, 507);
+            this.Eingabe.Name = "Eingabe";
+            this.Eingabe.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Eingabe.Size = new System.Drawing.Size(105, 39);
+            this.Eingabe.TabIndex = 8;
+            this.Eingabe.Text = "Manuelle Eingabe";
+            this.Eingabe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Eingabe.UseVisualStyleBackColor = true;
+            this.Eingabe.Click += new System.EventHandler(this.Eingabe_Click);
+            // 
             // Form1
             // 
+            this.AcceptButton = this.buttoncheck;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 471);
+            this.ClientSize = new System.Drawing.Size(283, 558);
+            this.Controls.Add(this.Eingabe);
             this.Controls.Add(this.richTextBox_BuchName);
-            this.Controls.Add(this.button_einstellung);
             this.Controls.Add(this.autodruck);
             this.Controls.Add(this.buttonprint);
             this.Controls.Add(this.buttoncheck);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Signature Print";
@@ -159,7 +164,7 @@
         private Button buttoncheck;
         private Button buttonprint;
         private CheckBox autodruck;
-        private Button button_einstellung;
         private RichTextBox richTextBox_BuchName;
+        private Button Eingabe;
     }
 }
